@@ -2,11 +2,11 @@ import { createContext } from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-
 export const Context = createContext()
 
 export const ContextProvider = ({ children }) => {
   const [pokemons, setPokemons] = useState([])
+  const [pokemonSearch, setPokemonSearch] = useState('')
 
   useEffect(() => {
     getPokemons()

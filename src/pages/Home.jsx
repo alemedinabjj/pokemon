@@ -16,12 +16,12 @@ export const Home = () => {
   return (
     <div>
       <Container maxWidth="false">
-        <Grid container spacing={4}>
+        <Grid container spacing={4} sx={{ margin: "auto" }}>
           {pokemons.length === 0 ? (
             <Skelet />
           ) : (
             pokemons.map(pokemon => (
-              <Grid item xs={12} sm={6} md={4} xl={3} key={pokemon.name}>
+              <Grid display="flex" alignItems="center" justifyContent="center" item xs={12} sm={6} md={4} xl={3} key={pokemon.name}>
                 <PokeCard pokemon={pokemon} />
               </Grid>
             ))

@@ -12,7 +12,7 @@ export default function PokeCard({ pokemon, loading }) {
   return (
     <>
     {loading ?  <Skelet /> : (
-      <Card sx={{ maxWidth: 345, marginTop: '2rem', background: "linear-gradient(0deg, white 20%, #1976d2 90%)"}}>
+      <Card sx={{minWidth: 345, maxWidth: 345, marginTop: '2rem', background: "linear-gradient(0deg, white 20%, #1976d2 90%)"}}>
       <CardMedia
         component="img"
         height="340"

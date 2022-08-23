@@ -29,7 +29,7 @@ export const ContextProvider = ({ children }) => {
     if(name === '') {
       getPokemons()
     } else {
-      const endpoint = `https://pokeapi.co/api/v2/pokemon/${name}`
+      const endpoint = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       const response = await axios.get(endpoint)
       setPokemons([response.data])
       setLoading(false)

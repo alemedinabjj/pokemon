@@ -6,7 +6,7 @@ export const Context = createContext()
 
 export const ContextProvider = ({ children }) => {
   const [pokemons, setPokemons] = useState([])
-  const [pokemonSearch, setPokemonSearch] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getPokemons()
@@ -24,12 +24,17 @@ export const ContextProvider = ({ children }) => {
     console.log(data)
   }
 
-  const searchPokemons = name => {
-    name === ''
-      ? getPokemons()
-      : setPokemons(
-          pokemons.filter(pokemon => pokemon.name.includes(name.toLowerCase()))
-        )
+  const searchPokemons = async (name) => {
+    setLoading(true)
+    if(name === '') {
+      getPokemons()
+    } else {
+      const endpoint = `https://pokeapi.co/api/v2/pokemon/${name}`
+      const response = await axios.get(endpoint)
+      setPokemons([response.data])
+      setLoading(false)
+    }
+    
   }
 
   const morePokemon = async () => {
@@ -37,10 +42,16 @@ export const ContextProvider = ({ children }) => {
     for (let i = pokemons.length + 1; i <= pokemons.length + 10; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`)
     }
+   try{
+    setLoading(true)
     const promises = endpoints.map(endpoint => axios.get(endpoint))
     const responses = await Promise.all(promises)
     const data = responses.map(response => response.data)
     setPokemons([...pokemons, ...data])
+    setLoading(false)
+   }catch(error){
+     console.log(error)
+   }
   }
 
   useEffect(() => {
@@ -48,7 +59,7 @@ export const ContextProvider = ({ children }) => {
   }, [])
 
   return (
-    <Context.Provider value={{ pokemons, setPokemons, morePokemon, searchPokemons, getPokemons }}>
+    <Context.Provider value={{ loading, pokemons, setPokemons, morePokemon, searchPokemons, getPokemons }}>
       {children}
     </Context.Provider>
   )

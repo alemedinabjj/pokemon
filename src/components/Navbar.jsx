@@ -1,28 +1,31 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import { Context } from '../Context/Context';
-import { useContext } from 'react';
+import * as React from 'react'
+import { styled, alpha } from '@mui/material/styles'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import InputBase from '@mui/material/InputBase'
+import SearchIcon from '@mui/icons-material/Search'
+import { Context } from '../Context/Context'
+import { useContext } from 'react'
+import CardMedia from '@mui/material/CardMedia'
+import PokemonIMG from '../assets/pokemon.png'
+import { Link } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.25)
   },
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
+    width: 'auto'
+  }
+}))
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -31,8 +34,8 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   pointerEvents: 'none',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
-}));
+  justifyContent: 'center'
+}))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -45,31 +48,37 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
+        width: '20ch'
+      }
+    }
+  }
+}))
 
 export default function Navbar() {
-  
-
-  const { searchPokemons } = useContext(Context);
+  const { searchPokemons } = useContext(Context)
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, margin: '.3rem' }}>
       <AppBar position="static">
         <Toolbar>
-          
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Pokemon
+            <Link to="/">
+            <CardMedia
+              component="img"
+              className="pokemon-img"
+              height="90"
+              width="90"
+              image={PokemonIMG}
+              alt="logo do pokemon"
+            />
+            </Link>
           </Typography>
-          <Search onChange={(e) => searchPokemons(e.target.value)}>
+          <Search onChange={e => searchPokemons(e.target.value)}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -81,5 +90,5 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
     </Box>
-  );
+  )
 }

@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Link } from 'react-router-dom'
-import { Button } from '@mui/material'
+import { Button, Container } from '@mui/material'
 
 export const Details = () => {
   const theme = useTheme()
@@ -30,7 +30,7 @@ export const Details = () => {
   }, [pokemon])
 
   return (
-    <>
+    <Container sx={{minHeight: "100vh"}}>
       <Card
         sx={{
           display: 'flex',
@@ -56,11 +56,28 @@ export const Details = () => {
               variant="subtitle1"
               color="text.secondary"
               component="div"
-            >
+            >Tipos: {' '}
               {pokemon.types?.map(type => (
-                <span key={type.type.name}>{type.type.name} </span>
+                <span key={type.type.name}>{type.type.name}</span>
               ))}
-              {pokemon.weight}
+              {pokemon.weight ? (
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  Peso: {pokemon.weight / 10}kg
+                </Typography>
+              ) : null}
+              {pokemon.height ? (
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  Altura: {pokemon.height / 10} {pokemon.height % 10 === 0 ? 'm' : 'cm'}
+                </Typography>
+              ) : null}
             </Typography>
           </CardContent>
           <Box
@@ -80,6 +97,6 @@ export const Details = () => {
           <Link to="/">Voltar</Link>
         </Button>
       </Box>
-    </>
+    </Container>
   )
 }

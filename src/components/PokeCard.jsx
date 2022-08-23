@@ -6,15 +6,18 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { Link } from 'react-router-dom'
+import { Skelet } from './Skelet'
 
-export default function PokeCard({ pokemon }) {
+export default function PokeCard({ pokemon, loading }) {
   return (
-    <Card sx={{ maxWidth: 345, marginTop: '2rem' }}>
+    <>
+    {loading ?  <Skelet /> : (
+      <Card sx={{ maxWidth: 345, marginTop: '2rem', background: "linear-gradient(0deg, white 20%, #1976d2 90%)"}}>
       <CardMedia
         component="img"
         height="340"
         image={pokemon.sprites.other.home.front_default}
-        alt="green iguana"
+        alt={pokemon.name}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -26,6 +29,7 @@ export default function PokeCard({ pokemon }) {
           <Link to={`/details/${pokemon.name}`}>Detalhes</Link>
         </Button>
       </CardActions>
-    </Card>
+    </Card> )  }
+    </>
   )
 }

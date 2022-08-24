@@ -58,7 +58,7 @@ export const Details = () => {
               component="div"
             >Tipos: {' '}
               {pokemon.types?.map(type => (
-                <span key={type.type.name}>{type.type.name}</span>
+                <span key={type.type.name}>{' '}{type.type.name}</span>
               ))}
               {pokemon.weight ? (
                 <Typography
@@ -75,9 +75,28 @@ export const Details = () => {
                   color="text.secondary"
                   component="div"
                 >
-                  Altura: {pokemon.height / 10} {pokemon.height % 10 === 0 ? 'm' : 'cm'}
+                  Altura: {pokemon.height / 10} {pokemon.height % 10 === 0 ? 'Metro' : 'cm'}
                 </Typography>
               ) : null}
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                Habilidades: {' '}
+                {pokemon.abilities?.map(ability => (
+                  <span key={ability.ability.name}>{' '}{ability.ability.name}</span>
+                ))}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                {pokemon.stats?.map(stat => (
+                  <Typography key={stat.stat.name}>{' '}{stat.stat.name}: {stat.base_stat}</Typography>
+                ))}
+                </Typography>
             </Typography>
           </CardContent>
           <Box

@@ -29,12 +29,11 @@ LinearProgressWithLabel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+
 export default function ProgressStats({ pokemon, loading }) {
   
 
   const pokemonStats = pokemon.stats?.map(stat => stat.base_stat);
-
-  const nameStats = pokemon.stats?.map(stat => stat.stat.name);
 
   // const valueStatsPokemon = pokemonStats.map(stat => stat);
   
@@ -42,13 +41,14 @@ export default function ProgressStats({ pokemon, loading }) {
 
   console.log(Stats)
 
+  
 
 
   return (
     <Box sx={{ width: '70%' }}>
       {Stats?.map(stat => (
         <Box sx={{ height: '50px' }}>
-          <LinearProgressWithLabel sx={{padding: ".3rem"}} key={stat} value={stat} />
+          <LinearProgressWithLabel sx={{padding: ".3rem", }} key={stat} value={stat} />
         </Box>
       ))}
     </Box>

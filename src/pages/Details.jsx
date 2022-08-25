@@ -10,8 +10,9 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Link } from 'react-router-dom'
 import { Button, Container } from '@mui/material'
+import ProgressStats from '../components/ProgressStats'
 
-export const Details = () => {
+export const Details = ({ hp }) => {
   const theme = useTheme()
 
   const [pokemon, setPokemon] = useState({})
@@ -47,7 +48,7 @@ export const Details = () => {
           image={pokemon.sprites?.other.home.front_default}
           alt={pokemon.name}
         />
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
             <Typography component="div" variant="h5">
               {pokemon.name}
@@ -92,11 +93,25 @@ export const Details = () => {
                 variant="subtitle1"
                 color="text.secondary"
                 component="div"
+                sx={{textAlign: 'center', marginTop: '3rem'}}
+              >
+                Atributos: {' '}
+                </Typography>
+             <Box sx={{width:"100%", display: "flex", flexDirection: "row", alignItems: "space-between", justifyContent:"space-between", marginTop: "3rem"}}>
+             <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
               >
                 {pokemon.stats?.map(stat => (
-                  <Typography key={stat.stat.name}>{' '}{stat.stat.name}: {stat.base_stat}</Typography>
+                 <Box sx={{height: "50px"}}>
+                  <Typography key={stat.stat.name}>{' '}{stat.stat.name} </Typography> 
+                  </Box>
                 ))}
+                 
                 </Typography>
+                <ProgressStats pokemon={pokemon} />
+             </Box>
             </Typography>
           </CardContent>
           <Box

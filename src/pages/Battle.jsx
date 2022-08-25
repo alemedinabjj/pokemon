@@ -4,7 +4,6 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import { Context } from '../Context/Context'
 import { useState } from 'react'
 import CardMedia from '@mui/material/CardMedia'
 import SearchIcon from '@mui/icons-material/Search'
@@ -12,6 +11,8 @@ import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import axios from 'axios'
 import { Button } from '@mui/material'
+import BasicModal from '../components/BasicModal'
+import VS from '../assets/VS-PNG.png'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,11 +55,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   }
 }))
 
+const StyledImage = () => ({
+  position: 'absolute',
+  width: '200px',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+  left: '50%'
+})
+
 export const Battle = () => {
   const [pokemonsPrimary, setPokemonsPrimary] = useState([])
   const [pokemonsSecondary, setPokemonsSecondary] = useState([])
   const [pokeWinner, setPokeWinner] = useState(null)
   const [imageWinner, setImageWinner] = useState(null)
+  const [open, setOpen] = useState(false)
 
   const searchPokemonPrimary = async name => {
     if (name === '') {
@@ -87,62 +97,43 @@ export const Battle = () => {
   const pokemonSecondaryPicture = pokemonsSecondary.map(
     pokemon => pokemon.sprites?.other.home.front_default
   )
-  const hpPrimary = pokemonsPrimary.map(pokemon => pokemon.stats[0].base_stat)
-  console.log(hpPrimary)
-  const attackPrimary = pokemonsPrimary.map(
-    pokemon => pokemon.stats[1].base_stat
-  )
-  const defensePrimary = pokemonsPrimary.map(
-    pokemon => pokemon.stats[2].base_stat
-  )
-  const speedPrimary = pokemonsPrimary.map(
-    pokemon => pokemon.stats[3].base_stat
-  )
 
-  const hpSecondary = pokemonsSecondary.map(
-    pokemon => pokemon.stats[0].base_stat
-  )
-  console.log(attackPrimary)
-  const attackSecondary = pokemonsSecondary.map(
-    pokemon => pokemon.stats[1].base_stat
-  )
-  const defenseSecondary = pokemonsSecondary.map(
-    pokemon => pokemon.stats[2].base_stat
-  )
-  const speedSecondary = pokemonsSecondary.map(
-    pokemon => pokemon.stats[3].base_stat
-  )
-  console.log(attackSecondary)
-
-  console.log(pokeWinner)
+  const reduceStatsPrimary = pokemonsPrimary.reduce((acc, pokemon) => {
+    acc.push(
+      pokemon.stats.reduce((acc, stat) => {
+        acc += stat.base_stat
+        return acc
+      }, 0)
+    )
+    return acc
+  }, [])
+  const reduceStatsSecondary = pokemonsSecondary.reduce((acc, pokemon) => {
+    acc.push(
+      pokemon.stats.reduce((acc, stat) => {
+        acc += stat.base_stat
+        return acc
+      }, 0)
+    )
+    return acc
+  }, [])
 
   const battlePokemon = () => {
-    if (
-      hpPrimary[0] > hpSecondary[0] &&
-      attackPrimary[0] > attackSecondary[0] &&
-      defensePrimary[0] > defenseSecondary[0] &&
-      speedPrimary[0] > speedSecondary[0]
-
-    ) {
+    if (reduceStatsPrimary[0] > reduceStatsSecondary[0]) {
       setPokeWinner(pokemonPrimary)
       setImageWinner(pokemonPrimaryPicture)
-    } else if (
-      hpPrimary[0] < hpSecondary[0] &&
-      attackPrimary[0] < attackSecondary[0] &&
-      defensePrimary[0] < defenseSecondary[0] &&
-      speedPrimary[0] < speedSecondary[0]
-    ) {
+    } else if (reduceStatsPrimary[0] < reduceStatsSecondary[0]) {
       setPokeWinner(pokemonSecondary)
       setImageWinner(pokemonSecondaryPicture)
     } else {
-      return 'draw'
+      setPokeWinner(null)
+      setImageWinner(null)
+      alert('Pokemon empatados')
     }
+    setOpen(true)
   }
 
-
-
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ minHeight: "100vh" }}>
       <Typography variant="h4" component="h1" gutterBottom textAlign="center">
         Battle
       </Typography>
@@ -150,10 +141,11 @@ export const Battle = () => {
         sx={{
           display: 'flex',
           flexDirection: 'row',
-          gap: '1rem',
+          gap: '2.4rem',
           width: '100%',
-          alignItems: "start",
-          justifyContent: "center"
+          alignItems: 'start',
+          justifyContent: 'center',
+          position: 'relative'
         }}
       >
         <Box sx={{ width: '300px' }}>
@@ -180,6 +172,12 @@ export const Battle = () => {
             </CardContent>
           </Card>
         </Box>
+        <CardMedia
+          component="img"
+          image={VS}
+          alt="VS"
+          sx={StyledImage}
+        />
         <Box sx={{ width: '300px' }}>
           <Card>
             <Search onChange={e => searchSecondaryPokemon(e.target.value)}>
@@ -215,23 +213,24 @@ export const Battle = () => {
           Battle
         </Button>
       </Box>
-     <Box sx={{ width: '100%', textAlign: 'center', marginTop: '1rem', display: 'flex', alignItems: "start", justifyContent:"center"  }}>
-     <Box sx={{ width: '300px', textAlign: 'center', marginTop: '1rem'}}>
-      <Typography variant="h5" component="h2" textAlign="center">
-        Winner
-      </Typography>
-      <CardContent>
-        <Typography variant="h5" component="h2" textAlign="center">
-          {pokeWinner}
-        </Typography>
-        <CardMedia
-          component="img"
-          height="250"
-          image={imageWinner}
-          alt={pokeWinner}
-        />
-      </CardContent>
-      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          textAlign: 'center',
+          marginTop: '1rem',
+          display: 'flex',
+          alignItems: 'start',
+          justifyContent: 'center'
+        }}
+      >
+        {pokeWinner && (
+          <BasicModal
+            pokeWinner={pokeWinner}
+            imageWinner={imageWinner}
+            setOpen={setOpen}
+            open={open}
+          />
+        )}
       </Box>
     </Container>
   )

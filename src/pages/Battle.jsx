@@ -14,6 +14,7 @@ import { Button } from '@mui/material'
 import BasicModal from '../components/BasicModal'
 import VS from '../assets/VS-PNG.png'
 import BATTLE from '../assets/battle.png'
+import noPokemon from '../assets/nopokemon.png'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -169,8 +170,9 @@ export const Battle = () => {
               <CardMedia
                 component="img"
                 height="250"
-                image={pokemonPrimaryPicture}
+                image={pokemonsPrimary.length > 0 ? pokemonPrimaryPicture : noPokemon}
                 alt={pokemonPrimary}
+                sx={{ objectFit: 'contain' }}
               />
             </CardContent>
           </Card>
@@ -194,8 +196,9 @@ export const Battle = () => {
               <CardMedia
                 component="img"
                 height="250"
-                image={pokemonSecondaryPicture}
+                image={pokemonsSecondary.length > 0 ? pokemonSecondaryPicture : noPokemon}
                 alt={pokemonSecondary}
+                sx={{ objectFit: 'contain' }}
               />
             </CardContent>
           </Card>

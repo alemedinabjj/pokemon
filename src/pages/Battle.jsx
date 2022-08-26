@@ -65,6 +65,19 @@ const StyledImage = () => ({
   left: '50%'
 })
 
+const StyledTitleBattle = () => ({
+  width: '450px', 
+  margin: 'auto', 
+  paddingBlock: '2rem',
+  textAlign: 'center',
+
+  //media queries
+  '@media (max-width: 768px)': {
+    width: '100%'
+  }
+
+})
+
 export const Battle = () => {
   const [pokemonsPrimary, setPokemonsPrimary] = useState([])
   const [pokemonsSecondary, setPokemonsSecondary] = useState([])
@@ -126,9 +139,12 @@ export const Battle = () => {
     } else if (reduceStatsPrimary[0] < reduceStatsSecondary[0]) {
       setPokeWinner(pokemonSecondary)
       setImageWinner(pokemonSecondaryPicture)
+    } else if (reduceStatsPrimary[0] === reduceStatsSecondary[0] && pokemonPrimary.length > 0 && pokemonSecondary.length > 0) {
+      setPokeWinner(['Empate!'])
+      setImageWinner(noPokemon)
     } else {
-      setPokeWinner(null)
-      setImageWinner(null)
+      setPokeWinner(['Sem pokemons para batalha!'])
+      setImageWinner(noPokemon)
     }
     setOpen(true)
   }
@@ -138,7 +154,7 @@ export const Battle = () => {
       <CardMedia
         component="img"
         src={BATTLE}
-        sx={{ width: '450px', margin: 'auto', paddingBlock: '2rem' }}
+        sx={StyledTitleBattle}
       />
 
       <Box

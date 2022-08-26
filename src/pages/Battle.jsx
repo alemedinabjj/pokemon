@@ -15,6 +15,8 @@ import BasicModal from '../components/BasicModal'
 import VS from '../assets/VS-PNG.png'
 import BATTLE from '../assets/battle.png'
 import noPokemon from '../assets/nopokemon.png'
+import { SelectPoke } from '../components/SelectPoke'
+import { SelectPokeSecondary } from '../components/SelectPoke'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -86,22 +88,14 @@ export const Battle = () => {
   const [open, setOpen] = useState(false)
 
   const searchPokemonPrimary = async name => {
-    if (name === '') {
-      getPokemons()
-    } else {
       const endpoint = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       const response = await axios.get(endpoint)
       setPokemonsPrimary([response.data])
-    }
   }
   const searchSecondaryPokemon = async name => {
-    if (name === '') {
-      getPokemons()
-    } else {
       const endpoint = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       const response = await axios.get(endpoint)
       setPokemonsSecondary([response.data])
-    }
   }
 
   const pokemonPrimary = pokemonsPrimary.map(pokemon => pokemon.name)
@@ -170,6 +164,7 @@ export const Battle = () => {
       >
         <Box sx={{ width: '300px' }}>
           <Card>
+            <SelectPoke setPokemonsPrimary={setPokemonsPrimary} searchPokemonPrimary={searchPokemonPrimary} />
             <Search onChange={e => searchPokemonPrimary(e.target.value)}>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -196,9 +191,10 @@ export const Battle = () => {
         <CardMedia component="img" image={VS} alt="VS" sx={StyledImage} />
         <Box sx={{ width: '300px' }}>
           <Card>
+              <SelectPokeSecondary searchSecondaryPokemon={searchSecondaryPokemon} />
             <Search onChange={e => searchSecondaryPokemon(e.target.value)}>
               <SearchIconWrapper>
-                <SearchIcon />
+                <SearchIcon  />
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"

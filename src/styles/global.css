@@ -11,3 +11,9 @@ a{
 .pokemon-img {
   width: 10rem!important;
 }
+/* scroll bar fora da page */
+::-webkit-scrollbar {
+  width: 0rem;
+  /* scroll fixed */
+  
+}

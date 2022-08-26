@@ -6,9 +6,6 @@ import Modal from '@mui/material/Modal';
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 
-
-
-
 const style = {
   position: 'absolute',
   top: '50%',

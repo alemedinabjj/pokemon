@@ -14,7 +14,7 @@ function LinearProgressWithLabel(props) {
       </Box>
       <Box sx={{ minWidth: 35 }}>
         <Typography variant="body2" color="text.secondary">{`${Math.round(
-          props.value,
+          props.valueNumber
         )}`}</Typography>
       </Box>
     </Box>
@@ -39,6 +39,7 @@ export default function ProgressStats({ pokemon, loading }) {
   
   let Stats = pokemonStats?.map(stat => stat);
 
+
   console.log(Stats)
 
   
@@ -48,7 +49,7 @@ export default function ProgressStats({ pokemon, loading }) {
     <Box sx={{ width: '70%' }}>
       {Stats?.map(stat => (
         <Box sx={{ height: '50px' }}>
-          <LinearProgressWithLabel sx={{padding: ".3rem", }} key={stat} value={stat} />
+          <LinearProgressWithLabel sx={{padding: ".3rem", }} key={stat} value={stat / 1.7} valueNumber={stat} />
         </Box>
       ))}
     </Box>

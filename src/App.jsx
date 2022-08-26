@@ -5,12 +5,14 @@ import Navbar from './components/Navbar'
 import { ContextProvider } from './Context/Context'
 import { Footer } from './components/Footer'
 import { Battle } from './pages/Battle'
+import { ButtonBattle } from './components/ButtonBattle'
 
 function App() {
   return (
     <ContextProvider>
       <Router>
         <Navbar />
+        <ButtonBattle />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/details/:name" element={<Details />} />

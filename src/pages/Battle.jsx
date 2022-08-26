@@ -13,6 +13,7 @@ import axios from 'axios'
 import { Button } from '@mui/material'
 import BasicModal from '../components/BasicModal'
 import VS from '../assets/VS-PNG.png'
+import BATTLE from '../assets/battle.png'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -127,16 +128,18 @@ export const Battle = () => {
     } else {
       setPokeWinner(null)
       setImageWinner(null)
-      alert('Pokemon empatados')
     }
     setOpen(true)
   }
 
   return (
-    <Container maxWidth="xl" sx={{ minHeight: "100vh" }}>
-      <Typography variant="h4" component="h1" gutterBottom textAlign="center">
-        Battle
-      </Typography>
+    <Container maxWidth="xl" sx={{ minHeight: '100vh' }}>
+      <CardMedia
+        component="img"
+        src={BATTLE}
+        sx={{ width: '450px', margin: 'auto', paddingBlock: '2rem' }}
+      />
+
       <Box
         sx={{
           display: 'flex',
@@ -172,12 +175,7 @@ export const Battle = () => {
             </CardContent>
           </Card>
         </Box>
-        <CardMedia
-          component="img"
-          image={VS}
-          alt="VS"
-          sx={StyledImage}
-        />
+        <CardMedia component="img" image={VS} alt="VS" sx={StyledImage} />
         <Box sx={{ width: '300px' }}>
           <Card>
             <Search onChange={e => searchSecondaryPokemon(e.target.value)}>
@@ -224,6 +222,14 @@ export const Battle = () => {
         }}
       >
         {pokeWinner && (
+          <BasicModal
+            pokeWinner={pokeWinner}
+            imageWinner={imageWinner}
+            setOpen={setOpen}
+            open={open}
+          />
+        )}
+        {!pokeWinner && (
           <BasicModal
             pokeWinner={pokeWinner}
             imageWinner={imageWinner}

@@ -60,7 +60,7 @@ export const CardDetails = ({ pokemon, loading }) => {
                   color="text.secondary"
                   component="div"
                 >
-                  Altura: {pokemon.height / 10} {pokemon.height % 10 === 0 ? 'Metro' : 'cm'}
+                  Altura: {pokemon.height / 10} {pokemon.height % 10 > 0 ? 'Metro' : 'cm'}
                 </Typography>
               ) : null}
               <Typography

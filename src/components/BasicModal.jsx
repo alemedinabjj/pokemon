@@ -43,12 +43,12 @@ export default function BasicModal({ pokeWinner, imageWinner, open, setOpen }) {
             </Typography>
             <CardContent>
               <Typography variant="h5" component="h2" textAlign="center">
-                {pokeWinner}
+                {pokeWinner ? pokeWinner : 'No winner'}
               </Typography>
               <CardMedia
                 component="img"
                 height="250"
-                image={imageWinner}
+                image={pokeWinner ? imageWinner : 'Empate'}
                 alt={pokeWinner}
               />
             </CardContent>

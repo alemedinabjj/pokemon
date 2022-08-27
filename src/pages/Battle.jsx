@@ -108,9 +108,9 @@ export const Battle = () => {
     pokemon => pokemon.sprites?.other.home.front_default
   )
 
-  const reduceStatsPrimary = pokemonsPrimary.reduce((acc, pokemon) => {
+  const reduceStatsPrimary = pokemonsPrimary?.reduce((acc, pokemon) => {
     acc.push(
-      pokemon.stats.reduce((acc, stat) => {
+      pokemon.stats?.reduce((acc, stat) => {
         acc += stat.base_stat
         return acc
       }, 0)
@@ -119,7 +119,7 @@ export const Battle = () => {
   }, [])
   const reduceStatsSecondary = pokemonsSecondary.reduce((acc, pokemon) => {
     acc.push(
-      pokemon.stats.reduce((acc, stat) => {
+      pokemon.stats?.reduce((acc, stat) => {
         acc += stat.base_stat
         return acc
       }, 0)

@@ -9,6 +9,9 @@ import { Button, Container } from '@mui/material'
 import ProgressStats from '../components/ProgressStats'
 
 export const CardDetails = ({ pokemon }) => {
+
+  // ajuste pokemon height em cm e metros
+
   return (
     <>
       <Container sx={{ minHeight: '100vh' }}>
@@ -58,7 +61,7 @@ export const CardDetails = ({ pokemon }) => {
                     component="div"
                   >
                     Altura: {pokemon.height / 10}{' '}
-                    {pokemon.height % 10 >= 1 ? 'Metros' : 'cm'}
+                    {pokemon.height / 10 > 1 ? 'metros' : 'cm'}
                   </Typography>
                 ) : null}
                 <Typography

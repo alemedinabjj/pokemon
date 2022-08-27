@@ -11,6 +11,7 @@ import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import axios from 'axios'
 import { Button } from '@mui/material'
+import { Link } from 'react-router-dom'
 import BasicModal from '../components/BasicModal'
 import VS from '../assets/VS-PNG.png'
 import BATTLE from '../assets/battle.png'
@@ -253,6 +254,9 @@ export const Battle = () => {
           />
         )}
       </Box>
+      <Button variant="outlined" color="primary">
+            <Link to="/">Voltar</Link>
+          </Button>
     </Container>
   )
 }

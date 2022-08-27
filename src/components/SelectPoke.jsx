@@ -25,7 +25,7 @@ export const SelectPoke = ({ setPokemonsPrimary, searchPokemonPrimary }) => {
   }
 
   return (
-    <div>
+    <div style={{ padding: '.5rem' }}>
       <FormControl variant="outlined" sx={{width: "100%", marginTop: '.5rem'}}>
         <InputLabel id="demo-simple-select-outlined-label">Pokemon</InputLabel>
         <Select
@@ -67,7 +67,7 @@ export const SelectPokeSecondary = ({ setPokemonsSecondary, searchSecondaryPokem
   }
 
   return (
-    <div>
+    <div style={{ padding: '.5rem' }}>
       <FormControl variant="outlined" sx={{width: "100%", marginTop: '.5rem'}}>
         <InputLabel id="demo-simple-select-outlined-label">Pokemon</InputLabel>
         <Select

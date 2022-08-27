@@ -7,6 +7,7 @@ import Box from '@mui/material/Box'
 import { Context } from '../Context/Context'
 import { useContext } from 'react'
 import { Skelet } from '../components/Skelet'
+import { ButtonBattle } from '../components/ButtonBattle'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 export const Home = () => {
@@ -47,6 +48,7 @@ export const Home = () => {
           )}
         </Box>
       </Container>
+      <ButtonBattle />
     </div>
   )
 }

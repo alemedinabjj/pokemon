@@ -47,9 +47,9 @@ export default function ProgressStats({ pokemon, loading }) {
 
   return (
     <Box sx={{ width: '70%' }}>
-      {Stats?.map(stat => (
+      {Stats?.map((stat, id) => (
         <Box sx={{ height: '50px' }}>
-          <LinearProgressWithLabel sx={{padding: ".3rem", }} key={stat} value={stat / 1.7} valueNumber={stat} />
+          <LinearProgressWithLabel sx={{padding: ".3rem", }} key={id} value={stat / 1.7} valueNumber={stat} />
         </Box>
       ))}
     </Box>

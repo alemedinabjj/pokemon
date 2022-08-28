@@ -42,8 +42,8 @@ export const CardDetails = ({ pokemon }) => {
                 component="div"
               >
                 Tipos:{' '}
-                {pokemon.types?.map(type => (
-                  <span key={type.type.name}> {type.type.name}</span>
+                {pokemon.types?.map((type, id) => (
+                  <span key={id}> {type.type.name}</span>
                 ))}
                 {pokemon.weight ? (
                   <Typography
@@ -70,8 +70,8 @@ export const CardDetails = ({ pokemon }) => {
                   component="div"
                 >
                   Habilidades:{' '}
-                  {pokemon.abilities?.map(ability => (
-                    <span key={ability.ability.name}>
+                  {pokemon.abilities?.map((ability, id) => (
+                    <span key={id}>
                       {' '}
                       {ability.ability.name}
                     </span>

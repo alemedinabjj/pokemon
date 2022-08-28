@@ -89,14 +89,22 @@ export const Battle = () => {
   const [open, setOpen] = useState(false)
 
   const searchPokemonPrimary = async name => {
+    try{
       const endpoint = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       const response = await axios.get(endpoint)
       setPokemonsPrimary([response.data])
+    }catch(err){
+      err
+    }
   }
   const searchSecondaryPokemon = async name => {
+    try{
       const endpoint = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       const response = await axios.get(endpoint)
       setPokemonsSecondary([response.data])
+    }catch(err) {
+      err
+    }
   }
 
   const pokemonPrimary = pokemonsPrimary.map(pokemon => pokemon.name)

@@ -7,7 +7,7 @@ export const Footer = () => {
     <Box
       sx={{
         width: '100%',
-        padding: '3rem',
+        padding: '2rem',
         background: '#1976d2',
         boxSizing: 'border-box',
         margin: 0,

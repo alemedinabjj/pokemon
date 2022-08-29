@@ -34,32 +34,11 @@ export const ContextProvider = ({ children }) => {
       setPokemons([response.data])
       setLoading(false)
     }
-    
   }
 
-  const morePokemon = async () => {
-    let endpoints = []
-    for (let i = pokemons.length + 1; i <= pokemons.length + 10; i++) {
-      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`)
-    }
-   try{
-    setLoading(true)
-    const promises = endpoints.map(endpoint => axios.get(endpoint))
-    const responses = await Promise.all(promises)
-    const data = responses.map(response => response.data)
-    setPokemons([...pokemons, ...data])
-    setLoading(false)
-   }catch(error){
-     console.log(error)
-   }
-  }
-
-  useEffect(() => {
-    morePokemon()
-  }, [])
 
   return (
-    <Context.Provider value={{ loading, pokemons, setPokemons, morePokemon, searchPokemons, getPokemons }}>
+    <Context.Provider value={{ loading, pokemons, setPokemons, searchPokemons, getPokemons, setLoading }}>
       {children}
     </Context.Provider>
   )

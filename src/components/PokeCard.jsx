@@ -7,18 +7,24 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { Link } from 'react-router-dom'
 import { Skelet } from './Skelet'
+import POKEBOLA from '../assets/pokebola.png'
+import { StyleLineCard } from '../styles/StyleLineCard'
 
 export default function PokeCard({ pokemon, loading }) {
   return (
     <>
     {loading ?  <Skelet /> : (
-      <Card sx={{minWidth: 345, maxWidth: 345, marginTop: '2rem', background: "linear-gradient(0deg, white 20%, #1976d2 90%)"}}>
+      <Card sx={{minWidth: 345, maxWidth: 345, marginTop: '2rem', background: "linear-gradient(0deg, white 20%, #1976d27f 90%)"}}>
       <CardMedia
         component="img"
         height="340"
         image={pokemon.sprites.other.home.front_default}
         alt={pokemon.name}
+        sx={{ marginBottom: '3rem' }}
       />
+     <StyleLineCard>
+      <img src={POKEBOLA} alt="pokebola" />
+     </StyleLineCard>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}

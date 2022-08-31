@@ -57,8 +57,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
   const { searchPokemons } = useContext(Context)
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0)
+  }
+
   return (
-    <Box sx={{ flexGrow: 1, margin: '.3rem' }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        margin: '.3rem',
+        position: 'sticky',
+        top: '5px',
+        zIndex: '5'
+      }}
+    >
       <AppBar position="static">
         <Toolbar>
           <Typography
@@ -68,14 +80,15 @@ export default function Navbar() {
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
             <Link to="/">
-            <CardMedia
-              component="img"
-              className="pokemon-img"
-              height="90"
-              width="90"
-              image={PokemonIMG}
-              alt="logo do pokemon"
-            />
+              <CardMedia
+                component="img"
+                className="pokemon-img"
+                height="90"
+                width="90"
+                image={PokemonIMG}
+                alt="logo do pokemon"
+                onClick={scrollToTop}
+              />
             </Link>
           </Typography>
           <Search onChange={e => searchPokemons(e.target.value)}>
